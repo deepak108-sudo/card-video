@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@theme {
+  --animate-orbital: orbital 10s linear infinite;
+}
+
+@keyframes orbital {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
