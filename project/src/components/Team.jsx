@@ -10,13 +10,28 @@ export default function TeamSection() {
     const video = videoRef.current;
     if (!video) return;
 
+    // smoother replay
     const onEnd = () => {
-      video.currentTime = 0;
+      video.currentTime = 1.5;
       video.play();
     };
 
+    // pause when tab is hidden
+    const onVisibilityChange = () => {
+      if (document.hidden) {
+        video.pause();
+      } else {
+        video.play();
+      }
+    };
+
     video.addEventListener("ended", onEnd);
-    return () => video.removeEventListener("ended", onEnd);
+    document.addEventListener("visibilitychange", onVisibilityChange);
+
+    return () => {
+      video.removeEventListener("ended", onEnd);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+    };
   }, []);
 
   return (
@@ -26,14 +41,15 @@ export default function TeamSection() {
         ref={videoRef}
         className="fixed inset-0 w-full h-full object-cover -z-10"
         autoPlay
-        loop
         muted
         playsInline
-        preload="auto"
-        poster="/fallback.png"
+        preload="metadata"
       >
-        <source src="/bg-video.webm" type="video/webm" />
-        <source src="/solar4k.mp4" type="video/mp4" />
+        {/* Mobile first */}
+        <source src="/solar.mp4" type="video/mp4" media="(max-width: 768px)" />
+
+        {/* Desktop */}
+        <source src="/solar.mp4" type="video/mp4" media="(min-width: 769px)" />
       </video>
 
       <div className="max-w-7xl mx-auto">
