@@ -1,5 +1,5 @@
 import React from "react";
-import OrbitalView from "./OrbitalView"; // Import the new component
+// import OrbitalView from "./OrbitalView"; // Import the new component
 
 const TeamCard = ({ member }) => {
   if (!member) return null;
@@ -15,7 +15,7 @@ const TeamCard = ({ member }) => {
             <div className="absolute inset-0 rounded-full bg-blue-200/20 blur-2xl"></div>
 
             {/* Injected SVG Functionality */}
-            <OrbitalView name={name} />
+            {/* <OrbitalView name={name} /> */}
 
             <div className="absolute inset-6 rounded-full overflow-hidden border-2 border-blue-400/60 shadow-lg shadow-blue-500/50">
               <img
